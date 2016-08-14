@@ -1,6 +1,16 @@
 spring:
   application:
      name: quotes-service
+
+security:
+  basic: 
+    enabled: false
+
+---
+
+spring:
+  profiles: cloud
+
 pivotal:
   quotes:
     quotes_url: http://dev.markitondemand.com/Api/v2/Quote/json?symbol={symbol}
@@ -8,6 +18,11 @@ pivotal:
     companies_url: http://dev.markitondemand.com/Api/v2/Lookup/json?input={name}
     yahoo_rest_query: https://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol in ('{symbol}')&format={fmt}&env={env}
     yahoo_env: http://datatables.org/alltables.env
-security:
-  basic:
-    enabled: false
+
+---
+
+spring:
+  profiles: local
+
+server:
+  port: 8083
